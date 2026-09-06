@@ -1,7 +1,12 @@
 import axios from 'axios';
 
+const configuredApiUrl = import.meta.env.VITE_API_URL || 'https://e-commerce-4ch2.onrender.com/api';
+const apiBaseUrl = configuredApiUrl.replace(/\/+$/, '').endsWith('/api')
+  ? configuredApiUrl.replace(/\/+$/, '')
+  : `${configuredApiUrl.replace(/\/+$/, '')}/api`;
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'https://e-commerce-4ch2.onrender.com/api',
+  baseURL: apiBaseUrl,
 });
 
 // Attach JWT from localStorage on every request
