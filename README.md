@@ -2,6 +2,12 @@
 
 A complete MERN-stack (MongoDB, Express, React, Node.js) e-commerce platform built as a portfolio/internship submission project.
 
+## Live Deployment
+
+- Frontend: https://e-commerce-9qpz.vercel.app/
+- Backend API: https://e-commerce-4ch2.onrender.com/
+- API health check: https://e-commerce-4ch2.onrender.com/api/health
+
 ---
 
 ## Architecture Overview
@@ -47,7 +53,7 @@ checkouts cannot decrement stock below zero.
 
 1. In [Vercel](https://vercel.com), import the same repository.
 2. Set the project **Root Directory** to `frontend`.
-3. Set `VITE_API_URL` to `https://<your-render-backend>.onrender.com/api`.
+3. Set `VITE_API_URL` to `https://e-commerce-4ch2.onrender.com/api`.
 4. Use **Build command** `npm run build` and **Output directory** `dist`.
 5. Deploy, copy the Vercel URL into Render's `CLIENT_URL`, then redeploy the backend.
 
@@ -171,16 +177,16 @@ curl http://localhost:5000/api/products
    ```
    MONGO_URI     = <your Atlas connection string>
    JWT_SECRET    = <long random string>
-   CLIENT_URL    = https://<your-vercel-project>.vercel.app
+  CLIENT_URL    = https://e-commerce-9qpz.vercel.app
    NODE_ENV      = production
    ```
-4. Deploy and verify `https://<your-render-service>.onrender.com/api/health` returns `status: ok`.
+4. Deploy and verify `https://e-commerce-4ch2.onrender.com/api/health` returns `status: ok`.
 
 ### Frontend → Vercel
 
 1. In [Vercel](https://vercel.com), import the same repository.
 2. Set the project **Root Directory** to `frontend`.
-3. Set `VITE_API_URL` to `https://<your-render-backend>.onrender.com/api`.
+3. Set `VITE_API_URL` to `https://e-commerce-4ch2.onrender.com/api`.
 4. Use **Build command** `npm run build` and **Output directory** `dist`.
 5. Deploy, copy the Vercel URL into Render's `CLIENT_URL`, then redeploy the backend.
 
