@@ -18,6 +18,7 @@ e-commerce/
 │   ├── models/       # Mongoose models (User, Product, Cart, Order)
 │   ├── routes/       # Express route handlers
 │   ├── middleware/   # auth, error handler, validator
+│   ├── app.js        # Express app and HTTP middleware
 │   ├── server.js     # App entry point
 │   └── seed.js       # Database seeder
 └── frontend/         # React (Vite) SPA
@@ -49,15 +50,13 @@ checkouts cannot decrement stock below zero.
 
 ## Production Security Notes
 
-### Frontend → Vercel
+- Set a long random `JWT_SECRET`; never use the development value in production.
+- Set `CLIENT_URL` to the exact deployed frontend origin. CORS is not wildcarded.
+- Authentication endpoints are rate-limited and responses include security headers.
+- Use HTTPS and a real payment provider before accepting live orders.
+- Do not run `npm run seed` against a production database; it clears existing data.
 
-1. In [Vercel](https://vercel.com), import the same repository.
-2. Set the project **Root Directory** to `frontend`.
-3. Set `VITE_API_URL` to `https://e-commerce-4ch2.onrender.com/api`.
-4. Use **Build command** `npm run build` and **Output directory** `dist`.
-5. Deploy, copy the Vercel URL into Render's `CLIENT_URL`, then redeploy the backend.
-
-The frontend `vercel.json` preserves React Router routes on refresh. MongoDB Atlas must allow the Render service to connect through its network access policy.
+### Backend (`backend/.env`)
 
 ```
 PORT=5000
@@ -120,6 +119,15 @@ npm run dev
 ```
 
 Open **http://localhost:5173** in your browser.
+
+### 4. Run backend tests
+
+```bash
+cd backend
+npm test
+```
+
+The test suite currently covers the health endpoint and unauthenticated checkout protection. The tests do not require a running MongoDB instance.
 
 ---
 
