@@ -9,9 +9,20 @@ const orderRoutes = require('./routes/orderRoutes');
 const { errorHandler } = require('./middleware/errorMiddleware');
 
 const app = express();
+const allowedOrigins = new Set([
+  process.env.CLIENT_URL,
+  'https://e-commerce-9qpz.vercel.app',
+  'https://e-commerce-jor0okk81-praju.vercel.app',
+  'http://localhost:5173',
+].filter(Boolean));
 
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.has(origin)) {
+      return callback(null, true);
+    }
+    return callback(new Error('Origin not allowed by CORS'));
+  },
   credentials: true,
 }));
 app.use(helmet());
