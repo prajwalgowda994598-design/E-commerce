@@ -1,10 +1,15 @@
 require('dotenv').config();
+const dns = require('node:dns');
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const User = require('./models/User');
 const Product = require('./models/Product');
 const Cart = require('./models/Cart');
 const Order = require('./models/Order');
+
+if (process.env.MONGO_URI?.startsWith('mongodb+srv://')) {
+  dns.setServers(['1.1.1.1', '8.8.8.8']);
+}
 
 const seedData = async () => {
   await mongoose.connect(process.env.MONGO_URI);
